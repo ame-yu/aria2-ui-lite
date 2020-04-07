@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>aria2-ui-lite</title>
+	<meta charset="UTF-8">
+<style>body {
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+}
+
+
+#uri {
+  width: 30vw;
+  display: inline-block;
+}
+
+#tasks button{
+  display: inline-block;
+  padding: .2rem;
+}
+
+
+@charset "UTF-8";body{font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;line-height:1.4;max-width:800px;margin:20px auto;padding:0 10px;color:#363636;background:#fff;text-rendering:optimizeLegibility}button,input,textarea{transition:background-color .1s linear,border-color .1s linear,color .1s linear,box-shadow .1s linear,transform .1s ease}h1{font-size:2.2em;margin-top:0}h1,h2,h3,h4,h5,h6{margin-bottom:12px}h1,h2,h3,h4,h5,h6,strong{color:#000}b,h1,h2,h3,h4,h5,h6,strong,th{font-weight:600}blockquote{border-left:4px solid rgba(0,150,191,.67);margin:1.5em 0;padding:.5em 1em;font-style:italic}blockquote>footer{margin-top:10px;font-style:normal}address,blockquote cite{font-style:normal}a[href^=mailto]:before{content:"📧 "}a[href^=tel]:before{content:"📞 "}a[href^=sms]:before{content:"💬 "}button,input[type=button],input[type=checkbox],input[type=submit]{cursor:pointer}input:not([type=checkbox]):not([type=radio]),select{display:block}button,input,select,textarea{color:#000;background-color:#efefef;font-family:inherit;font-size:inherit;margin-right:6px;margin-bottom:6px;padding:10px;border:none;border-radius:6px;outline:none}button,input:not([type=checkbox]):not([type=radio]),select,textarea{-webkit-appearance:none}textarea{margin-right:0;width:100%;box-sizing:border-box;resize:vertical}button,input[type=button],input[type=submit]{padding-right:30px;padding-left:30px}button:hover,input[type=button]:hover,input[type=submit]:hover{background:#ddd}button:focus,input:focus,select:focus,textarea:focus{box-shadow:0 0 0 2px rgba(0,150,191,.67)}button:active,input[type=button]:active,input[type=checkbox]:active,input[type=radio]:active,input[type=submit]:active{transform:translateY(2px)}button:disabled,input:disabled,select:disabled,textarea:disabled{cursor:not-allowed;opacity:.5}::-webkit-input-placeholder{color:#949494}:-ms-input-placeholder{color:#949494}::-ms-input-placeholder{color:#949494}::placeholder{color:#949494}a{text-decoration:none;color:#0076d1}a:hover{text-decoration:underline}code,kbd{background:#efefef;color:#000;padding:5px;border-radius:6px}pre>code{padding:10px;display:block;overflow-x:auto}img{max-width:100%}hr{border:none;border-top:1px solid #dbdbdb}table{border-collapse:collapse;margin-bottom:10px;width:100%}td,th{padding:6px;text-align:left}th{border-bottom:1px solid #dbdbdb}tbody tr:nth-child(2n){background-color:#efefef}::-webkit-scrollbar{height:10px;width:10px}::-webkit-scrollbar-track{background:#efefef;border-radius:6px}::-webkit-scrollbar-thumb{background:#d5d5d5;border-radius:6px}::-webkit-scrollbar-thumb:hover{background:#c4c4c4}
+
+
+
+/*# sourceMappingURL=/src.a2b27638.css.map */</style></head>
+
+<body>
+	<h1>Aria2 UI lite console</h1>
+	<hr>
+	<h2 id="info">No message</h2>
+	<hr>
+		<input type="text" id="uri" placeholder="HTTP/FTP/Magnet">
+		<button id="adduri">提交任务</button>
+	<h3>下载中的任务</h3>
+	<table id="table">
+		<thead>
+		  <tr>
+			<th>任务名称</th>
+			<th>已下载大小</th>
+			<th>连接数</th>
+			<th>操作</th>
+		  </tr>
+		</thead>
+		<tbody id="tasks">
+		  <tr>
+			<td>连接...</td>
+		  </tr>
+		</tbody>
+	  </table>
+
+	  <details>
+		<summary>展开服务器信息</summary>
+		<table>
+			<tbody id="conf">
+			</tbody>
+		  </table>
+	  </details>
+	<script>// modules are defined as an array
+// [ module function, map of requires ]
+//
+// map of requires is short require name -> numeric require
+//
+// anything defined in a previous bundle is accessed via the
+// orig method which is the require for previous bundles
+parcelRequire = (function (modules, cache, entry, globalName) {
+  // Save the require from previous bundle to this closure if any
+  var previousRequire = typeof parcelRequire === 'function' && parcelRequire;
+  var nodeRequire = typeof require === 'function' && require;
+
+  function newRequire(name, jumped) {
+    if (!cache[name]) {
+      if (!modules[name]) {
+        // if we cannot find the module within our internal map or
+        // cache jump to the current global require ie. the last bundle
+        // that was added to the page.
+        var currentRequire = typeof parcelRequire === 'function' && parcelRequire;
+        if (!jumped && currentRequire) {
+          return currentRequire(name, true);
+        }
+
+        // If there are other bundles on this page the require from the
+        // previous one is saved to 'previousRequire'. Repeat this as
+        // many times as there are bundles until the module is found or
+        // we exhaust the require chain.
+        if (previousRequire) {
+          return previousRequire(name, true);
+        }
+
+        // Try the node require function if it exists.
+        if (nodeRequire && typeof name === 'string') {
+          return nodeRequire(name);
+        }
+
+        var err = new Error('Cannot find module \'' + name + '\'');
+        err.code = 'MODULE_NOT_FOUND';
+        throw err;
+      }
+
+      localRequire.resolve = resolve;
+      localRequire.cache = {};
+
+      var module = cache[name] = new newRequire.Module(name);
+
+      modules[name][0].call(module.exports, localRequire, module, module.exports, this);
+    }
+
+    return cache[name].exports;
+
+    function localRequire(x){
+      return newRequire(localRequire.resolve(x));
+    }
+
+    function resolve(x){
+      return modules[name][1][x] || x;
+    }
+  }
+
+  function Module(moduleName) {
+    this.id = moduleName;
+    this.bundle = newRequire;
+    this.exports = {};
+  }
+
+  newRequire.isParcelRequire = true;
+  newRequire.Module = Module;
+  newRequire.modules = modules;
+  newRequire.cache = cache;
+  newRequire.parent = previousRequire;
+  newRequire.register = function (id, exports) {
+    modules[id] = [function (require, module) {
+      module.exports = exports;
+    }, {}];
+  };
+
+  var error;
+  for (var i = 0; i < entry.length; i++) {
+    try {
+      newRequire(entry[i]);
+    } catch (e) {
+      // Save first error but execute all entries
+      if (!error) {
+        error = e;
+      }
+    }
+  }
+
+  if (entry.length) {
+    // Expose entry point to Node, AMD or browser globals
+    // Based on https://github.com/ForbesLindesay/umd/blob/master/template.js
+    var mainExports = newRequire(entry[entry.length - 1]);
+
+    // CommonJS
+    if (typeof exports === "object" && typeof module !== "undefined") {
+      module.exports = mainExports;
+
+    // RequireJS
+    } else if (typeof define === "function" && define.amd) {
+     define(function () {
+       return mainExports;
+     });
+
+    // <script>
+    } else if (globalName) {
+      this[globalName] = mainExports;
+    }
+  }
+
+  // Override the current require with this new one
+  parcelRequire = newRequire;
+
+  if (error) {
+    // throw error from earlier, _after updating parcelRequire_
+    throw error;
+  }
+
+  return newRequire;
+})({"D9Nj":[function(require,module,exports) {
+
+},{}],"K0yk":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.changeUnit = changeUnit;
+
+function changeUnit(arg, arg2) {
+  var num1 = Number(arg);
+  var num2 = Number(arg2);
+  var unit = "B";
+  var rate = 1;
+  const num = num2 && num2 > num1 ? num2 : num1;
+
+  if (num < 1 << 10) {//小于G
+    //B
+  } else if (num < 1 << 20) {
+    //小于M
+    [rate, unit] = [1 << 10, "KB"];
+  } else if (num < 1 << 30) {
+    //小于G
+    [rate, unit] = [1 << 20, "M"];
+  } else {
+    [rate, unit] = [1 << 30, "G"];
+  }
+
+  const show = a => `${(a / rate).toFixed(1)}${unit}`;
+
+  return arg2 ? [show(num1), show(num2)] : show(num);
+}
+},{}],"H99C":[function(require,module,exports) {
+"use strict";
+
+require("./styles.css");
+
+require("./water.css");
+
+var _utils = require("./utils");
+
+const $ = arg => Array.prototype.slice.call(document.querySelectorAll.bind(document)(arg));
+
+var rpcurl = "http://localhost:6800/jsonrpc";
+
+function info(msg = "No Message") {
+  $("#info")[0].innerText = msg;
+}
+
+async function cmd(method, obj) {
+  let data = {
+    jsonrpc: "2.0",
+    method,
+    id: 1,
+    ...obj
+  };
+
+  try {
+    let rst = await fetch(rpcurl, {
+      body: JSON.stringify(data),
+      // must match 'Content-Type' header
+      cache: 'no-cache',
+      // *default, no-cache, reload, force-cache, only-if-cached
+      method: 'POST',
+      // *GET, POST, PUT, DELETE, etc.
+      mode: 'cors' // no-cors, cors, *same-origin
+
+    });
+    const json = await rst.json();
+    return json;
+  } catch (error) {
+    console.log(error);
+    throw error("无法接受的指令");
+  }
+}
+
+const tasks = $("#tasks")[0];
+
+const _item = task => {
+  const stateMap = {
+    active: "▶",
+    paused: "⏸",
+    complete: "🆗",
+    removed: "❌"
+  };
+  const file = task.files[0];
+  const fileName = file.path; // console.log(task)
+
+  return `
+  <tr>
+			<td>${stateMap[task.status]}${fileName}</td>
+			<td>${(0, _utils.changeUnit)(task.completedLength, task.totalLength).join("/")}</td>
+			<td>${file.uris.filter(it => it.status === "used").length}</td>
+			<td class="ctl" gid="${task.gid}"><button>⏸</button> <button>▶</button><button>❌</button></td>
+	</tr>
+  `;
+};
+
+function adduri(url) {
+  cmd("aria2.addUri", {
+    params: [[url]]
+  }).then(resp => {
+    if (resp.error) {
+      info(resp.error.message);
+    }
+  });
+}
+
+function scan() {
+  function taskCmd(name, id) {
+    return () => cmd(name, {
+      params: [id]
+    });
+  }
+
+  $("#tasks .ctl").forEach(it => {
+    const id = it.getAttribute("gid");
+    const btns = it.querySelectorAll("button");
+    btns[0].addEventListener("click", taskCmd("aria2.pause", id));
+    btns[1].addEventListener("click", taskCmd("aria2.unpause", id));
+    btns[2].addEventListener("click", async () => {
+      await taskCmd("aria2.remove", id)();
+      taskCmd("aria2.removeDownloadResult", id)();
+    });
+  });
+}
+
+$("#adduri")[0].addEventListener("click", () => {
+  const uri = $("#uri")[0].value;
+  adduri(uri);
+});
+setInterval(async () => {
+  const active = await cmd("aria2.tellActive");
+  const waiting = await cmd("aria2.tellWaiting", {
+    params: [0, 1000]
+  });
+  const stopped = await cmd("aria2.tellStopped", {
+    params: [0, 1000]
+  });
+  tasks.innerHTML = active.result.map(it => _item(it)).join("\n");
+  tasks.innerHTML += waiting.result.map(it => _item(it)).join("\n");
+  tasks.innerHTML += stopped.result.map(it => _item(it)).join("\n");
+  const state = (await cmd("aria2.getGlobalStat")).result;
+  document.title = `⬇${(0, _utils.changeUnit)(state.downloadSpeed)} ⬆${(0, _utils.changeUnit)(state.uploadSpeed)}`;
+  scan();
+}, 2000);
+
+(async function () {
+  const conf = await cmd("aria2.getGlobalOption");
+  var list = "";
+
+  for (const key in conf.result) {
+    list += `<tr><td>${key}</td><td>${conf.result[key]}</td></tr>`;
+  }
+
+  $("#conf")[0].innerHTML = list;
+})(); // navigator.serviceWorker.register('../sw.js')
+},{"./styles.css":"D9Nj","./water.css":"D9Nj","./utils":"K0yk"}]},{},["H99C"], null)
+//# sourceMappingURL=/src.a2b27638.js.map</script>
+</body>
+
+</html>

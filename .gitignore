@@ -1,3 +1,7 @@
+*.map
+docs/*.css
+docs/*.js
+!sw.js
 # Logs
 logs
 *.log

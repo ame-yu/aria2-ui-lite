@@ -1,0 +1,47 @@
+[
+    {
+        "jsonrpc": "2.0",
+        "method": "aria2.addUri",
+        "id": 1,
+        "params": [
+            [
+                "http://localhost:1234/"
+            ],
+            {
+                "split": "10",
+                "max-connection-per-server": "15",
+                "seed-ratio": "1.0"
+            }
+        ]
+    }
+]
+
+
+[
+    {
+        "jsonrpc": "2.0",
+        "method": "aria2.pause",
+        "id": 1,
+        "params": [
+            "b676f77640dd85ed"
+        ]
+    }
+]
+
+[
+    {
+        "jsonrpc": "2.0",
+        "method": "aria2.remove",
+        "id": 1,
+        "params": [
+            "b676f77640dd85ed"
+        ]
+    }
+]
+
+{
+    "jsonrpc": "2.0",
+    "method": "aria2.getGlobalOption",
+    "id": 1,
+    "params": []
+}
